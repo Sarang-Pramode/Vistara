@@ -5,31 +5,20 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Add some lighting to the scene
-var ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
-var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-directionalLight.position.set(0, 1, 1);
-scene.add(directionalLight);
+// Create a cube in the scene
+var geometry = new THREE.BoxGeometry();
+var material = new THREE.MeshBasicMaterial({color: 0x00fff0});
+var cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
 
-// Create a basic ground plane
-var groundGeometry = new THREE.PlaneGeometry(100, 100);
-var groundMaterial = new THREE.MeshPhongMaterial({color: 0x333333});
-var ground = new THREE.Mesh(groundGeometry, groundMaterial);
-ground.rotation.x = -Math.PI / 2;
-scene.add(ground);
-
-// Create a basic box in the scene
-var boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-var boxMaterial = new THREE.MeshPhongMaterial({color: 0xff0000});
-var box = new THREE.Mesh(boxGeometry, boxMaterial);
-box.position.set(0, 0.5, 0);
-scene.add(box);
+// Position the camera to view the cube
+camera.position.z = 5;
 
 // Animate the scene
 function animate() {
   requestAnimationFrame(animate);
-  box.rotation.y += 0.01;
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
   renderer.render(scene, camera);
 }
 animate();
