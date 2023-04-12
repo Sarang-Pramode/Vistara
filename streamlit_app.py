@@ -34,15 +34,8 @@ def process_las_file(filepath):
     #change classification to int
     lidar_df["classification"] = lidar_df["classification"].astype(int)
 
-    # #Raw point cloud data
-    # rawPoints = np.array((
-    #     ((lidar_df.X)*(Xscale)) + Xoffset, # convert ft to m
-    #     (lidar_df.Y)*(Yscale) + Yoffset, #convert ft to m
-    #     (lidar_df.Z)*(Zscale) + Zoffset
-    # )).transpose()
-
     #sample lidar_df
-    lidar_df = lidar_df[::450]
+    lidar_df = lidar_df[::20]
 
 
     return lidar_df
@@ -52,24 +45,17 @@ filepath = "/Volumes/Elements/TerraVide/Datasets/EC2_data/Package_Generated/2519
 # Process the uploaded file
 point_cloud_df = process_las_file(filepath)
 
-
-# #Get clasdification types
-# classification_types = point_cloud_df["classification"].unique().tolist()
-
-# st.write("Classification types:", classification_types)
-
 #Convert classification types to string
 point_cloud_df["classification"] = point_cloud_df["classification"].astype(str)
 
 # Create a color map for the classification types
 
 color_map = {
-    '1': 'green',
-    '2': 'red',#green
-    #'3': 'blue',
-    '4': 'blue',
-    '5': 'orange',
-    '6': 'purple'
+    '1': 'white',
+    '2': 'red',
+    '4': 'green',
+    '5': 'green',
+    '6': 'green'
 }
 
 # Create 3D scatter plot using Plotly with classification-based colors
