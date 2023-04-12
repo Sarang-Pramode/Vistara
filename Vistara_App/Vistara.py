@@ -17,6 +17,8 @@ st.markdown("<h3 style='text-align: \
             A Streamlit App for Visualizing LiDAR Point Clouds</h3>"
             , unsafe_allow_html=True)
 
+st.session_state["filename"] = "Vistara"
+
 # Function to process the LAS file and convert it to a DataFrame
 def process_las_file(filepath):
     
