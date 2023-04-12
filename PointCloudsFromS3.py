@@ -51,6 +51,7 @@ def stackTiles(lat,lon, boxSize=100, prefix ='NY_NewYorkCity/'):  # 'NY_FingerLa
         
     
     '''
+    low, high = 0,0
     
     s3 = boto3.resource('s3', config=Config(signature_version=UNSIGNED))
     bucket = s3.Bucket('usgs-lidar-public')
@@ -99,7 +100,7 @@ def stackTiles(lat,lon, boxSize=100, prefix ='NY_NewYorkCity/'):  # 'NY_FingerLa
                 low = 0
                 high = 1000
             lidar_df = pd.concat([lidar_df,lidar_df2])
-                    
+            
     lidar_df = lidar_df[lidar_df['Z'] > low ]
     lidar_df = lidar_df[lidar_df['Z'] < high ]
     lidar_df = lidar_df[lidar_df['X'] <= x + boxSize/2 ]
@@ -110,14 +111,14 @@ def stackTiles(lat,lon, boxSize=100, prefix ='NY_NewYorkCity/'):  # 'NY_FingerLa
 
 ###############################################################################
 
-# lat, lon = 42.44388282145252, -76.48573793521436 
-# boxSize = 100
+lat, lon = 42.44388282145252, -76.48573793521436 
+boxSize = 100
 
-# lidar_df = stackTiles(lat,lon,boxSize,'NY_FingerLakes_1_2020/')
+lidar_df = stackTiles(lat,lon,boxSize)
 
-# fig = plt.figure(figsize=(12,12), dpi=300, constrained_layout=True)
-# ax1 = fig.add_subplot(111, aspect='equal')
-# ax1.scatter(lidar_df['X'],lidar_df['Y'],marker="+",s=50/boxSize,c=lidar_df['Z'],cmap='bone')
-# trees = lidar_df[lidar_df['number_of_returns'] - lidar_df['return_number'] > 0 ]
-# ax1.scatter(trees['X'],trees['Y'],marker="+",s=0.01,c=trees['Z'],cmap='summer')
+fig = plt.figure(figsize=(12,12), dpi=300, constrained_layout=True)
+ax1 = fig.add_subplot(111, aspect='equal')
+ax1.scatter(lidar_df['X'],lidar_df['Y'],marker="+",s=50/boxSize,c=lidar_df['Z'],cmap='bone')
+trees = lidar_df[lidar_df['number_of_returns'] - lidar_df['return_number'] > 0 ]
+ax1.scatter(trees['X'],trees['Y'],marker="+",s=0.01,c=trees['Z'],cmap='summer')
 
