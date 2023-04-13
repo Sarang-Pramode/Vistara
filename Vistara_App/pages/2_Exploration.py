@@ -103,7 +103,7 @@ logging.info("TerraVide lidar processing Initated")
 SR_df = LFP.Get_SRpoints(lidar_df)
 
 #lasTile class
-TileObj = LFP.lasTile(SR_df,TileDivision)
+TileObj = LFP.lasTile(SR_df,TileDivision=10)
 
 #Serialized
 s_start = time.time()
@@ -121,8 +121,8 @@ Other_points = []
 
 GP_obj = GP.GP_class()
 
-for row in range(TileDivision):
-    for col in range(TileDivision):
+for row in range(10):
+    for col in range(10):
 
         tile_segment_points = lidar_TilesubsetArr[row][col].iloc[:,:3].to_numpy()
 
@@ -199,46 +199,46 @@ TileObj_MR = MRC.MR_class(MR_df,TileDivision) #Multiple Return Points
 #Serialized Creation of Lidar Subtiles
 lidar_TilesubsetArr = TileObj_MR.Get_subtileArray()
 
-st.write(lidar_TilesubsetArr[0][0])
+#st.write(lidar_TilesubsetArr[0][0])
 
-All_eps = [] #Stores all eps values by tile id
-N_Neighbours = 12
-subT_ID = 0
-TileDivision =10
-EPS_distribution_df = pd.DataFrame(columns=['T_ID', 'T_lat', 'T_lon', 'subT_ID', 'subT_lat','subT_lon','EPS'])
+# All_eps = [] #Stores all eps values by tile id
+# N_Neighbours = 12
+# subT_ID = 0
+# TileDivision =10
+# EPS_distribution_df = pd.DataFrame(columns=['T_ID', 'T_lat', 'T_lon', 'subT_ID', 'subT_lat','subT_lon','EPS'])
 
 
-if(len(lidar_TilesubsetArr[0][0].iloc[:,:3].to_numpy()) > N_Neighbours):
+# if(len(lidar_TilesubsetArr[0][0].iloc[:,:3].to_numpy()) > N_Neighbours):
 
-    cluster_df = lidar_TilesubsetArr[row][col].iloc[:,:3]
-    subtile_location_str, subT_lat, subT_long = Log_TileLocation(cluster_df)
-    subtile_eps = Get_eps_NN_KneeMethod(cluster_df)
-    All_eps.append(subtile_eps)
+#     cluster_df = lidar_TilesubsetArr[row][col].iloc[:,:3]
+#     subtile_location_str, subT_lat, subT_long = Log_TileLocation(cluster_df)
+#     subtile_eps = Get_eps_NN_KneeMethod(cluster_df)
+#     All_eps.append(subtile_eps)
 
-EPS_dist_df_row = [filename,subT_lat,subT_long]
-EPS_dist_df_row.append(subT_ID)
-EPS_dist_df_row.append(subT_lat)
-EPS_dist_df_row.append(subT_lat)
-EPS_dist_df_row.append(subtile_eps)
+# EPS_dist_df_row = [filename,subT_lat,subT_long]
+# EPS_dist_df_row.append(subT_ID)
+# EPS_dist_df_row.append(subT_lat)
+# EPS_dist_df_row.append(subT_lat)
+# EPS_dist_df_row.append(subtile_eps)
 
-EPS_distribution_df.loc[len(EPS_distribution_df.index)] = EPS_dist_df_row
+# EPS_distribution_df.loc[len(EPS_distribution_df.index)] = EPS_dist_df_row
 
-subT_ID = subT_ID + 1
+# subT_ID = subT_ID + 1
 
-Optimal_EPS = np.mean(All_eps)
-logging.info("Avg EPS for %s : %s",filename,Optimal_EPS)
+# Optimal_EPS = np.mean(All_eps)
+# logging.info("Avg EPS for %s : %s",filename,Optimal_EPS)
 
-EPS_CSV_filename = 'Spatial_HP_Distribution_'+filename+'.csv'
-EPS_CSV_dir = "Datasets/"+"Package_Generated/"+filename+"/LiDAR_HP_MATRIX_"+filename+"/"
-# Check whether the specified EPS_CSV_dir exists or not
-isExist = os.path.exists(EPS_CSV_dir)
+# EPS_CSV_filename = 'Spatial_HP_Distribution_'+filename+'.csv'
+# EPS_CSV_dir = "Datasets/"+"Package_Generated/"+filename+"/LiDAR_HP_MATRIX_"+filename+"/"
+# # Check whether the specified EPS_CSV_dir exists or not
+# isExist = os.path.exists(EPS_CSV_dir)
 
-if not isExist:
-# Create a new directory because it does not exist 
-    os.makedirs(EPS_CSV_dir)
+# if not isExist:
+# # Create a new directory because it does not exist 
+#     os.makedirs(EPS_CSV_dir)
 
-logging.info("MR - T_ID : %s - ACTION: HP_MATRIX CSV file Created",filename)
-EPS_distribution_df.to_csv(EPS_CSV_dir+EPS_CSV_filename)
+# logging.info("MR - T_ID : %s - ACTION: HP_MATRIX CSV file Created",filename)
+# EPS_distribution_df.to_csv(EPS_CSV_dir+EPS_CSV_filename)
 
 Tilecounter = 0
 Trees_Buffer = []
@@ -274,7 +274,7 @@ else:
 
 Trees_Buffer = np.array(Trees_Buffer)
 
-db = DBSCAN(eps=np.mean(EPS_distribution_df.EPS), min_samples=30).fit(Trees_Buffer)
+db = DBSCAN(eps=tile_eps, min_samples=30).fit(Trees_Buffer)
 core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
 core_samples_mask[db.core_sample_indices_] = True
 DB_labels = db.labels_

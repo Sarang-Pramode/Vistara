@@ -1,200 +1,70 @@
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
-2023-04-12 17:29:01,730 - root - INFO - TerraVide lidar processing Initated
-2023-04-12 17:29:01,739 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
-2023-04-12 17:29:01,785 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
-2023-04-12 17:29:01,884 - root - INFO - MR Classification Algorithm initated for : Vistara
-2023-04-12 17:29:01,926 - root - INFO - Avg EPS for Vistara : 2.8900865039244343
-2023-04-12 17:29:01,926 - root - INFO - MR - T_ID : Vistara - ACTION: HP_MATRIX CSV file Created
-2023-04-12 17:29:01,989 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
-2023-04-12 17:29:02,018 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 4
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+- Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9
+2023-04-13 12:03:52,549 - root - INFO - TerraVide lidar processing Initated
+2023-04-13 12:03:52,653 - root - INFO - Extraction of Subtile Matrix Buffer Serial Time for = 0
+2023-04-13 12:03:52,707 - root - INFO - Ground Point Extraction Algorithm Serial Time for Vistara = 0
+2023-04-13 12:03:52,849 - root - INFO - MR Classification Algorithm initated for : Vistara
+2023-04-13 12:03:53,000 - root - INFO - MR - T_ID : Vistara - ACTION: Trees Added to - S_ID : 0
+2023-04-13 12:03:53,041 - root - INFO - MR - T_ID : Vistara - ACTION: Total Trees : 9

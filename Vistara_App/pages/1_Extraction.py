@@ -161,7 +161,7 @@ if selected_points:
     print("Latitude:", lat)
     print("Longitude:", lon)
 
-    boxSize = 100
+    boxSize = 150
 
     lidar_df = stackTiles(lat,lon,boxSize)
 
