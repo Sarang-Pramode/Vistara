@@ -46,7 +46,7 @@ def process_las_file(filepath):
     lidar_df["classification"] = lidar_df["classification"].astype(int)
 
     #sample lidar_df
-    lidar_df = lidar_df[::400]
+    lidar_df = lidar_df[::10]
 
 
     return lidar_df

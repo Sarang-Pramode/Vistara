@@ -66,7 +66,7 @@ if __name__ == "__main__":
     filepath = "lasFile_Reconstructed_25192.las"
 
     # Process the uploaded file
-    point_cloud_df = input(filepath)
+    point_cloud_df = input(filepath, sample=10)
 
     #Write the output file
     output(point_cloud_df, "lasFile_Reconstructed_25192_sampled.las")
