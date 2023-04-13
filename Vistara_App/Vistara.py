@@ -21,7 +21,6 @@ st.session_state["filename"] = "Vistara"
 
 # Function to process the LAS file and convert it to a DataFrame
 def process_las_file(filepath):
-    
     las_file = laspy.read(filepath)
 
     #Making a datframe from the lidar data
