@@ -51,7 +51,7 @@ def process_las_file(filepath):
 
     return lidar_df
 
-filepath = "../lasFile_Reconstructed_25192_sampled.las"
+filepath = "lasFile_Reconstructed_25192_sampled.las"
 
 # Process the uploaded file
 point_cloud_df = process_las_file(filepath)
