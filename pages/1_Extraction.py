@@ -115,7 +115,7 @@ st.set_page_config(
 
 st.markdown("<h1 style='text-align: center; color: white;'>Project Vistara</h1>", unsafe_allow_html=True)
 
-filepath = '../2010 Census Tracts/geo_export_139fc905-b132-4c03-84d5-ae9e70dded42.shp'
+filepath = '2010 Census Tracts/geo_export_139fc905-b132-4c03-84d5-ae9e70dded42.shp'
 
 gdf = gpd.read_file(filepath)
 
