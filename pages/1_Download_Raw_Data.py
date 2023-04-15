@@ -141,6 +141,8 @@ if map_selection == "US":
     #Read the file into a geopandas dataframe
     gdf = gpd.GeoDataFrame.from_features(features)
 
+    #st.write(gdf.head())
+
     # Create Plotly figure
     fig = px.choropleth_mapbox(
         gdf,
@@ -148,6 +150,7 @@ if map_selection == "US":
         locations=gdf.index,
         mapbox_style='carto-positron',
         center={'lat': 27.8283, 'lon':-78.5795},
+        hover_data=['name'],
         zoom=3)
 
     fig.update_layout(height=800, width=1000, showlegend=False,
@@ -192,10 +195,12 @@ selected_points = plotly_events(fig)
 # Add a input to take in how big the box should be and limit it to 1000
 boxSize_input = st.sidebar.number_input("Enter the size of the box in meters", min_value=1, max_value=500, value=100)
 
-# Show a pop up if the user enters a value greater than 300 but let them continue
+#Store the box size in the session state
+st.session_state["boxSize"] = boxSize_input
 
-if boxSize_input > 500:
-    st.sidebar.warning("The box size is too large. It may take a while to process the data. Please be patient.")
+# Add a warning if the box size is too large
+if boxSize_input > 300:
+    st.sidebar.warning("The box size is too large. It may take a while to download the data. Please be patient.")
 
 LidarArea = None
 
@@ -217,8 +222,8 @@ if selected_points and boxSize_input:
 
     if map_selection == "US":
         name = single_row['name']
-        st.write(name)
-        st.write(f"Count of Lidar Points in Selected Area :  {single_row['count']}")
+        #st.write(name)
+        st.write(f"Count of Lidar Points in Mapped Area :  {single_row['count']}")
         lidarArea = '{}/'.format(name)
 
     elif map_selection == "NYC":

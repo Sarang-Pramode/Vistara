@@ -7,7 +7,6 @@ import plotly.express as px
 
 st.set_page_config(
         page_title="Visualizing LiDAR Point Clouds",
-        initial_sidebar_state='collapsed',
         layout='wide'
 )
 
@@ -87,12 +86,14 @@ fig.update_yaxes(showticklabels=False)
 
 st.plotly_chart(fig, use_container_width=True)
 
-st.markdown("<h4 style='text-align: \
+st.markdown("<p style='text-align: \
             center; color: white;'> \
             Vistara was built to showcase the capabilites of TerraVide \
             - an open source python package to process LiDAR data <br> \
-            The Tile you see above was classified into Trees , Buildings and ground from raw X,Y,Z coordinates</h4>"
+            The Tile you see above was classified into Trees , Buildings and ground from raw X,Y,Z coordinates</p>"
             , unsafe_allow_html=True)
+
+
 
 # Add a horizontal line that separates the footer from the main content and spans the entire width of the app
 st.markdown("<hr style='border: 1px solid grey;'>", unsafe_allow_html=True)

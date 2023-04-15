@@ -33,7 +33,7 @@ import alphashape
 from shapely.geometry import Point
 import json
 import laspy
-
+import random
 
 def InitiateLogger(filename="Vistara")-> None:
 
@@ -90,6 +90,8 @@ def Get_eps_NN_KneeMethod(cluster_df, N_neighbors = 12, display_plot=False):
 #Load in Extracted Lidar Data
 lidar_df = st.session_state["Extracted_Lidar_Data"]
 filename = st.session_state["filename"]
+#Get the Box size from session state
+BoxSize_input_usr = st.session_state["boxSize"]
 
 if (lidar_df is None):
     st.error("No Lidar Data Loaded")
@@ -99,7 +101,9 @@ else :
 
     st.markdown("## Ground Plane Extraction")
 
-    TileDivision = 1
+    TileDivision_g = int(BoxSize_input_usr/10)
+
+    st.write("TileDivision = ",TileDivision_g)
 
     #Initate logger
     InitiateLogger()
@@ -109,7 +113,7 @@ else :
     SR_df = LFP.Get_SRpoints(lidar_df)
 
     #lasTile class
-    TileObj = LFP.lasTile(SR_df,TileDivision=10)
+    TileObj = LFP.lasTile(SR_df,TileDivision=TileDivision_g)
 
     #Serialized
     s_start = time.time()
@@ -127,8 +131,8 @@ else :
 
     GP_obj = GP.GP_class()
 
-    for row in range(10):
-        for col in range(10):
+    for row in range(TileDivision_g):
+        for col in range(TileDivision_g):
 
             tile_segment_points = lidar_TilesubsetArr[row][col].iloc[:,:3].to_numpy()
 
@@ -208,9 +212,13 @@ else:
 
     #lidar_df, rawpoints, MR_df, SR_df = PreprocessLasFile(f, year, lasfiles_folderpath=fpath)
 
+    TileDivision_t = int(BoxSize_input_usr/100)
+
+    st.write("TileDivision tree = ",TileDivision_t)
+
     #lasTile class
-    TileObj_SR = MRC.MR_class(SR_df,TileDivision) #Single Return Points
-    TileObj_MR = MRC.MR_class(MR_df,TileDivision) #Multiple Return Points
+    TileObj_SR = MRC.MR_class(SR_df,TileDivision_t) #Single Return Points
+    TileObj_MR = MRC.MR_class(MR_df,TileDivision_t) #Multiple Return Points
 
     #Serialized Creation of Lidar Subtiles
     lidar_TilesubsetArr = TileObj_MR.Get_subtileArray()
@@ -260,37 +268,46 @@ else:
     Trees_Buffer = []
     N_Neighbours = 12
 
-    # for row in range(TileDivision):
-    #     for col in range(TileDivision):
+    tile_eps_arr = []
 
-    #         #print('-'*40)
+    for row in range(TileDivision_t):
+        for col in range(TileDivision_t):
+
+            #print('-'*40)
             
-    #         #print("TILE ID : ",Tilecounter)
-    #         Tilecounter = Tilecounter + 1
+            #print("TILE ID : ",Tilecounter)
+            Tilecounter = Tilecounter + 1
 
-    row = 0
-    col = 0
+            if (len(lidar_TilesubsetArr[row][col].iloc[:,:3].to_numpy()) > N_Neighbours):
 
-    if (len(lidar_TilesubsetArr[row][col].iloc[:,:3].to_numpy()) > N_Neighbours):
+                cluster_df = lidar_TilesubsetArr[row][col].iloc[:,:3]
+                tile_eps = Get_eps_NN_KneeMethod(cluster_df) #round(Optimal_EPS,2)
+                tile_eps_arr.append(tile_eps)
+                #st.write(tile_eps)
+                #print(tile_eps)
+                tile_segment_points = lidar_TilesubsetArr[row][col].iloc[:,:3].to_numpy()
+                subTileTree_Points,  _ = TileObj_MR.Classify_MultipleReturns(tile_segment_points,tile_eps)
 
-        cluster_df = lidar_TilesubsetArr[row][col].iloc[:,:3]
-        tile_eps = Get_eps_NN_KneeMethod(cluster_df) #round(Optimal_EPS,2)
-        #st.write(tile_eps)
-        #print(tile_eps)
-        tile_segment_points = lidar_TilesubsetArr[row][col].iloc[:,:3].to_numpy()
-        subTileTree_Points,  _ = TileObj_MR.Classify_MultipleReturns(tile_segment_points,tile_eps)
+                for t in subTileTree_Points:
+                    Trees_Buffer.append(t)
+                
+                logging.info("MR - T_ID : %s - ACTION: Trees Added to - S_ID : %d",filename,Tilecounter)
 
-        for t in subTileTree_Points:
-            Trees_Buffer.append(t)
-        
-        logging.info("MR - T_ID : %s - ACTION: Trees Added to - S_ID : %d",filename,Tilecounter)
+            else:
+                logging.warn("Empty Tileset Found")
 
-    else:
-        logging.warn("Empty Tileset Found")
+    #If there are no trees in the tile
+    if(len(Trees_Buffer) == 0):
+        logging.error("MR - T_ID : %s - ACTION: No Trees Found",filename)
+        st.error("No Trees Found")
+        st.stop()
 
     Trees_Buffer = np.array(Trees_Buffer)
 
-    db = DBSCAN(eps=tile_eps, min_samples=30).fit(Trees_Buffer)
+    #Get mean of Tile eps arr
+    Optimal_EPS = np.mean(tile_eps_arr)
+
+    db = DBSCAN(eps=Optimal_EPS, min_samples=30).fit(Trees_Buffer)
     core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
     core_samples_mask[db.core_sample_indices_] = True
     DB_labels = db.labels_
@@ -378,14 +395,40 @@ else:
     "11": "#E64D66",
     "12": "#4DB380",
     "13": "#FF4D4D",
-    "14": "#3C3C3C"
     }
+
+    #"14": "#3C3C3C" for the ground points
 
     #st.write(color_map)
 
-    #For every Class in the Combined_df, assign a color from the color_map
-    for i in range(len(Combined_df["class"].unique())):
-        Combined_df["class"] = Combined_df["class"].replace(str(i),color_map[str(i)])
+    # Get a list of all unique class labels in Combined_df
+    class_labels = Combined_df["class"].unique()
+
+    # Shuffle the color map keys to get a random order
+    color_keys = list(color_map.keys())
+    #random.shuffle(color_keys)
+
+    # Assign a unique color to all class labels that are '-1'
+    label_to_color = {label: "#3C3C3C" if label == '-1' else None for label in class_labels}
+
+    # Map each remaining unique class label to a color from the color map
+    i = 0
+    for label in label_to_color:
+        if label_to_color[label] is None:
+            if i < len(color_keys):
+                # Use a color from the color map if available
+                label_to_color[label] = color_map[color_keys[i]]
+            else:
+                # Assign a random color if the color map is exhausted
+                label_to_color[label] = random.choice(list(color_map.values()))
+            i += 1
+
+    # Replace all class labels with the mapped colors
+    Combined_df["class"] = Combined_df["class"].map(label_to_color)
+
+    # #For every Class in the Combined_df, assign a color from the color_map
+    # for i in range(len(Combined_df["class"].unique())):
+    #     Combined_df["class"] = Combined_df["class"].replace(str(i),color_map[str(i)])
 
     #Plot the combined dataframe
     fig = px.scatter_3d(Combined_df, x='X', y='Y', z='Z',
