@@ -2,8 +2,6 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import streamlit as st
 import plotly.express as px
-from streamlit_plotly_events import plotly_events # pip install streamlit-plotly-events
-import random
 
 #plotly events inside streamlit - https://github.com/null-jones/streamlit-plotly-events
 
@@ -18,6 +16,9 @@ import json
 import laspy
 import numpy as np
 import pandas as pd
+from shapely.geometry import Point
+
+# Roosevelt Island Index = 1625 , 1980
 
 def convertLatLon(lat,lon,epsgNumber):
     transformer = Transformer.from_crs( "epsg:4326", "epsg:{}".format(epsgNumber) ) 
@@ -35,7 +36,7 @@ def getLazFile(lazfilename):
         lidarDF['Z'] = lidarDF['Z'] * lz.header.scales[2] + lz.header.offsets[2]
     return lidarDF
 
-def stackTiles(lat,lon, boxSize=100, prefix ='NY_NewYorkCity/'):  # 'NY_FingerLakes_1_2020/' #
+def stackTiles_NotLimited(lat,lon, boxSize=1500, prefix ='NY_NewYorkCity/'):  # 'NY_FingerLakes_1_2020/' #
     '''
     
     Parameters:
@@ -112,142 +113,122 @@ def readGeoJSON(filepath):
         features = json.load(f)["features"]                
     return features
 
+def convertXY(x,y):
+    #translate from .las CRS to geojson CRS (NAD 1983) (UTM Zone 18N (meters))
+    transformer = Transformer.from_crs( "epsg:2263", "epsg:4326" ) 
+    lat, lon = transformer.transform(x, y)
+    return lat, lon
+
 ###############################################################################
 
-
 st.set_page_config(
-        page_title="Data Extraction",
+        page_title="Roosevelt Island",
 )
 
-st.markdown("<h1 style='text-align: center; color: white;'>Select A Location</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: white;'>Roosevelt Island</h1>", unsafe_allow_html=True)
 
-#Add the dropdown for the user to select between NYC map and US map
-st.sidebar.title("Select the map to proceed")
-map_selection = st.sidebar.selectbox("Select a map", ("NYC", "US"))
 
-if map_selection == "Select Map":
-    st.sidebar.markdown("Please select a map to proceed")
-
-#default map is NYC
 filepath = '2010 Census Tracts/geo_export_139fc905-b132-4c03-84d5-ae9e70dded42.shp'
-if map_selection == "US":
-    filepath = 'lidarBoundaries.geojson'
+gdf = gpd.read_file(filepath)
 
-    #read in the geojson file
-    features = readGeoJSON(filepath)
-
-    #Read the file into a geopandas dataframe
-    gdf = gpd.GeoDataFrame.from_features(features)
-
-    # Create Plotly figure
-    fig = px.choropleth_mapbox(
-        gdf,
-        geojson=gdf.geometry,
-        locations=gdf.index,
-        mapbox_style='carto-positron',
-        center={'lat': 27.8283, 'lon':-78.5795},
-        zoom=3)
-
-    fig.update_layout(height=800, width=1000, showlegend=False,
-                    margin=dict(l=0,r=0,b=0,t=0),
-                    paper_bgcolor="Black"
-    )
-
-
-elif map_selection == "NYC":
-    filepath = '2010 Census Tracts/geo_export_139fc905-b132-4c03-84d5-ae9e70dded42.shp'
-    gdf = gpd.read_file(filepath)
-
-    
-    # Create Plotly figure
-    fig = px.choropleth_mapbox(
-        gdf,
-        geojson=gdf.geometry,
-        locations=gdf.index,
-        mapbox_style='carto-positron',
-        center={'lat': 40.64, 'lon':-73.7},#center={'lat': 40.74949210762701, 'lon':-73.97236357852755},
-        zoom=10)
-
-    fig.update_layout(height=600, width=1000, showlegend=False,
-                    margin=dict(l=0,r=0,b=0,t=0),
-                    paper_bgcolor="cadetblue"
-    )
-
-
-
-selected_points = plotly_events(fig)
-
-
-# # structure of selected_points
-# [
+# # Create a map of the area
+# selected_points = [
 #   {
 #     "curveNumber": 0,
-#     "pointNumber": 2150,
-#     "pointIndex": 2150
+#     "pointNumber": 1625, # This is the index of the point in the dataframe
+#     "pointIndex": 1625
 #   }
 # ]
 
-# Add a input to take in how big the box should be and limit it to 1000
-boxSize_input = st.sidebar.number_input("Enter the size of the box in meters", min_value=1, max_value=500, value=100)
 
-# Show a pop up if the user enters a value greater than 300 but let them continue
+# Create a map of the area
+lidarArea = 'NY_NewYorkCity/'
 
-if boxSize_input > 500:
-    st.sidebar.warning("The box size is too large. It may take a while to process the data. Please be patient.")
+# Get indexs 1625 and 1980 from gdf
+rows_to_keep = [1625, 1980]
+RI_gdf = gdf.loc[rows_to_keep]
 
-LidarArea = None
+#st.write(RI_gdf)
 
-if selected_points and boxSize_input:
+# Get the latitude and longitude of the single row's geometry
+lat, lon = 40.75538269567443, -73.9560580956196 
 
-    # st.write(selected_points)
+st.write(f"Location : {lat,lon}")
 
-    single_row = gdf.iloc[selected_points[0]['pointIndex']]
+# Print the latitude and longitude
+print("Latitude:", lat)
+print("Longitude:", lon)
 
-    # Get the latitude and longitude of the single row's geometry
-    point = single_row.geometry.centroid
-    lat, lon = point.y, point.x
+st.write(f"Selected Area : {lidarArea}")
 
-    st.write(f"Location : {lat,lon}")
+#Plot RI_gdf
 
-    # Print the latitude and longitude
-    print("Latitude:", lat)
-    print("Longitude:", lon)
+# fig = px.choropleth_mapbox(
+#         RI_gdf,
+#         geojson=RI_gdf.geometry,
+#         locations=RI_gdf.index,
+#         mapbox_style='carto-positron',
+#         center={'lat': lat, 'lon': lon},
+#         zoom=12)
 
-    if map_selection == "US":
-        name = single_row['name']
-        st.write(name)
-        st.write(f"Count of Lidar Points in Selected Area :  {single_row['count']}")
-        lidarArea = '{}/'.format(name)
+# fig.update_layout(height=400, width=600, showlegend=False,
+#                 margin=dict(l=0,r=0,b=0,t=0),
+#                 paper_bgcolor="Black"
+# )
 
-    elif map_selection == "NYC":
-        lidarArea = 'NY_NewYorkCity/'
-    
-    st.write(f"Selected Area : {lidarArea}")
+# st.plotly_chart(fig)
 
-    boxSize = boxSize_input
+# Get the point cloud data
+Raw_lidar_df = stackTiles_NotLimited(lat,lon,prefix=lidarArea)
 
-    # Get the point cloud data
-    lidar_df = stackTiles(lat,lon,boxSize,prefix=lidarArea)
+# Write the number of points found
 
-    st.write(f"Totol Number of Points {len(lidar_df)}")
+st.write(f"Totol Number of Points {len(Raw_lidar_df)}")
 
-    # Create 3D scatter plot using Plotly with classification-based colors
-    fig = px.scatter_3d(lidar_df, x='X', y='Y', z='Z', color='class',
-                        hover_data=['X', 'Y', 'Z', 'class'])
+#make a 3d plot of the points
+Raw_lidar_df = Raw_lidar_df[::2]
 
-    fig.update_traces(marker=dict(size=1.2))
-    fig.update_layout(scene=dict(aspectmode='data'))
+# Create 3D scatter plot using Plotly with classification-based colors
+fig = px.scatter_3d(Raw_lidar_df, x='X', y='Y', z='Z', color='Z',
+                    hover_data=['X', 'Y', 'Z', 'class'],
+                    color_continuous_scale=px.colors.sequential.Viridis,
+                    width=400, height=500)
 
-    st.plotly_chart(fig)
-    st.write("Point cloud data:", lidar_df)
+fig.update_traces(marker=dict(size=1.2))
+fig.update_layout(scene=dict(aspectmode='data'), showlegend=False)
+fig.update_xaxes(showticklabels=False)
+fig.update_yaxes(showticklabels=False)
 
-    # Add a dpwnload button to download the lidar_df
-    st.download_button(
-        label="Download data as CSV",
-        data=lidar_df.to_csv(index=False),
-        file_name='Raw_lidarData.csv',
-        mime='text/csv',
-    )
 
-    # Save the point cloud data to the session state
-    st.session_state['Extracted_Lidar_Data'] = lidar_df
+st.plotly_chart(fig, use_container_width=True)
+
+
+# st.write(RI_new_lidar_df)
+
+# # Perform a spatial join between the two dataframes
+# joined = gpd.sjoin(gpd.GeoDataFrame(RI_lidar_df, geometry=gpd.points_from_xy(RI_lidar_df.X, RI_lidar_df.Y)), RI_gdf, op='within')
+
+# #st.write(joined)
+
+# st.write(f"Totol Number of Points {len(RI_lidar_df)}")
+
+# # Create 3D scatter plot using Plotly with classification-based colors
+# fig = px.scatter_3d(RI_lidar_df, x='X', y='Y', z='Z', color='class',
+#                     hover_data=['X', 'Y', 'Z', 'class'])
+
+# fig.update_traces(marker=dict(size=1.2))
+# fig.update_layout(scene=dict(aspectmode='data'))
+
+# st.plotly_chart(fig)
+# st.write("Point cloud data:", RI_lidar_df)
+
+# # Add a dpwnload button to download the RI_lidar_df
+# st.download_button(
+#     label="Download data as CSV",
+#     data=RI_lidar_df.to_csv(index=False),
+#     file_name='Raw_lidarData.csv',
+#     mime='text/csv',
+# )
+
+# # Save the point cloud data to the session state
+# st.session_state['Extracted_Lidar_Data_of_RI'] = RI_lidar_df
