@@ -124,6 +124,6 @@ st.markdown("<h6 style='text-align: \
 # Add a version number to the footer
 st.markdown("<h6 style='text-align: \
             left; color: #2d3645;'> \
-            Version 1.0.0</h6>"
+            Version 1.2.0</h6>"
             , unsafe_allow_html=True)
 

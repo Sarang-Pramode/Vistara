@@ -127,10 +127,11 @@ st.markdown("<h1 style='text-align: center; color: white;'>Select A Location</h1
 
 #Add the dropdown for the user to select between NYC map and US map
 st.sidebar.title("Select the map to proceed")
+
 map_selection = st.sidebar.selectbox("Select a map", ("NYC", "US"))
 
 #Add a checkbox to the sidebar and ask if the user wants to enter a manual location
-manual_location = st.sidebar.checkbox("Enter a manual location")
+manual_location = st.sidebar.checkbox("Enter a manual location", value=False)
 
 #If the user selects the manual location checkbox, then ask for the latitude and longitude
 if manual_location:
@@ -244,7 +245,7 @@ if (selected_points and boxSize_input) or (manual_location and boxSize_input and
         
         st.write(f"Selected Area : {lidarArea}")
     
-    elif manual_location and map_selection == "NYC":
+    elif manual_location:
         st.write(f"Location : {lat,lon}")
         lidarArea = 'NY_NewYorkCity/'
         st.write(f"Selected Area : {lidarArea}")
@@ -263,6 +264,7 @@ if (selected_points and boxSize_input) or (manual_location and boxSize_input and
     else:
         st.sidebar.warning("Please select a point on the map or enter a manual location(Only for NYC map)")
     
+    #st.plotly_chart(fig)
 
     boxSize = boxSize_input
 
@@ -290,13 +292,26 @@ if (selected_points and boxSize_input) or (manual_location and boxSize_input and
     )
 
     # Add a button to open the manual location on google earth
-    if manual_location and map_selection == "NYC":
+    # if manual_location:
 
-        #Create the link to open the location on google earth
-        link = f"Open Entered Location on Google Earth - https://earth.google.com/web/search/{lat},{lon}"
+    #Create the link to open the location on google earth
+    link = f"Open Location on Google Earth - https://earth.google.com/web/search/{lat},{lon}"
 
-        st.sidebar.write(link)
+    st.sidebar.write(link)
 
+        
 
     # Save the point cloud data to the session state
     st.session_state['Extracted_Lidar_Data'] = lidar_df
+
+# # Add a reset button to refresh the page
+# if st.sidebar.button("Refresh Selections"):
+
+#     selected_points = None
+#     manual_location = None
+#     lat = None
+#     lon = None
+#     boxSize_input = None
+#     lidar_df = None
+#     boxSize_input = None
+#     st.experimental_rerun()
