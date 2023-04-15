@@ -20,6 +20,8 @@ st.markdown("<h3 style='text-align: \
             , unsafe_allow_html=True)
 
 st.session_state["filename"] = "Vistara"
+st.session_state["Extracted_Lidar_Data"] = None
+
 
 # Function to process the LAS file and convert it to a DataFrame
 def process_las_file(filepath, sampling_rate=10):

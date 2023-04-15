@@ -119,6 +119,8 @@ st.set_page_config(
         page_title="Data Extraction",
 )
 
+st.session_state["Extracted_Lidar_Data"] = None
+
 st.markdown("<h1 style='text-align: center; color: white;'>Select A Location</h1>", unsafe_allow_html=True)
 
 #Add the dropdown for the user to select between NYC map and US map

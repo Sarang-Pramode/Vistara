@@ -35,8 +35,6 @@ import json
 import laspy
 
 
-st.markdown("## Ground Plane Extraction")
-
 def InitiateLogger(filename="Vistara")-> None:
 
     LoggerPath = "LogFile/"
@@ -93,56 +91,64 @@ def Get_eps_NN_KneeMethod(cluster_df, N_neighbors = 12, display_plot=False):
 lidar_df = st.session_state["Extracted_Lidar_Data"]
 filename = st.session_state["filename"]
 
-TileDivision = 1
+if (lidar_df is None):
+    st.error("No Lidar Data Loaded")
+    st.stop()
+else :
+    st.success("Lidar Data Loaded")
 
-#Initate logger
-InitiateLogger()
-logging.info("TerraVide lidar processing Initated")
+    st.markdown("## Ground Plane Extraction")
 
-#MR_df = LFP.Get_MRpoints(lidar_df) Not needed for ground points
-SR_df = LFP.Get_SRpoints(lidar_df)
+    TileDivision = 1
 
-#lasTile class
-TileObj = LFP.lasTile(SR_df,TileDivision=10)
+    #Initate logger
+    InitiateLogger()
+    logging.info("TerraVide lidar processing Initated")
 
-#Serialized
-s_start = time.time()
+    #MR_df = LFP.Get_MRpoints(lidar_df) Not needed for ground points
+    SR_df = LFP.Get_SRpoints(lidar_df)
 
-lidar_TilesubsetArr = TileObj.Get_subtileArray()
+    #lasTile class
+    TileObj = LFP.lasTile(SR_df,TileDivision=10)
 
-s_end = time.time()
-stime = s_end - s_start
-logging.info("Extraction of Subtile Matrix Buffer Serial Time for = %d",stime)
+    #Serialized
+    s_start = time.time()
 
-#Ground Plane Classifcation - Serial Implementation
-g_start = time.time()
-Potential_Ground_Points = []
-Other_points = []
+    lidar_TilesubsetArr = TileObj.Get_subtileArray()
 
-GP_obj = GP.GP_class()
+    s_end = time.time()
+    stime = s_end - s_start
+    logging.info("Extraction of Subtile Matrix Buffer Serial Time for = %d",stime)
 
-for row in range(10):
-    for col in range(10):
+    #Ground Plane Classifcation - Serial Implementation
+    g_start = time.time()
+    Potential_Ground_Points = []
+    Other_points = []
 
-        tile_segment_points = lidar_TilesubsetArr[row][col].iloc[:,:3].to_numpy()
+    GP_obj = GP.GP_class()
 
-        local_Ground_Points, Nlocal_Ground_Points = GP_obj.Extract_GroundPoints(tile_segment_points)
+    for row in range(10):
+        for col in range(10):
 
-        for k in local_Ground_Points:
-            Potential_Ground_Points.append(k) #append points which may be potentially ground points
-        for l in Nlocal_Ground_Points:
-            Other_points.append(l) #append points which may be potentially ground points
+            tile_segment_points = lidar_TilesubsetArr[row][col].iloc[:,:3].to_numpy()
 
-if len(Potential_Ground_Points) == 0:
-    logging.info("No Ground Points Found")
-    st.write("No Ground Points Found")
+            local_Ground_Points, Nlocal_Ground_Points = GP_obj.Extract_GroundPoints(tile_segment_points)
 
-    #Initiate empty 3d arrays
-    Potential_Ground_Points = np.array([None,None,None])
-    #st.stop()
+            for k in local_Ground_Points:
+                Potential_Ground_Points.append(k) #append points which may be potentially ground points
+            for l in Nlocal_Ground_Points:
+                Other_points.append(l) #append points which may be potentially ground points
 
-Potential_Ground_Points = np.array(Potential_Ground_Points)
-Other_points = np.array(Other_points)
+    if len(Potential_Ground_Points) == 0:
+        logging.info("No Ground Points Found")
+        st.write("No Ground Points Found")
+
+        #Initiate empty 3d arrays
+        Potential_Ground_Points = np.array([None,None,None])
+        #st.stop()
+
+    Potential_Ground_Points = np.array(Potential_Ground_Points)
+    Other_points = np.array(Other_points)
 
 if Potential_Ground_Points.shape[0] == 0 or Other_points.shape[0] == 0:
 
@@ -269,7 +275,7 @@ else:
 
         cluster_df = lidar_TilesubsetArr[row][col].iloc[:,:3]
         tile_eps = Get_eps_NN_KneeMethod(cluster_df) #round(Optimal_EPS,2)
-        st.write(tile_eps)
+        #st.write(tile_eps)
         #print(tile_eps)
         tile_segment_points = lidar_TilesubsetArr[row][col].iloc[:,:3].to_numpy()
         subTileTree_Points,  _ = TileObj_MR.Classify_MultipleReturns(tile_segment_points,tile_eps)
@@ -297,7 +303,7 @@ else:
     logging.info("MR - T_ID : %s - ACTION: Total Trees : %d",filename,Total_Trees)
 
     #write it to the app in bold
-    st.write("Total Trees : ",Total_Trees)
+    #st.write("Total Trees : ",Total_Trees)
 
 
     #Plotting the clustered trees
