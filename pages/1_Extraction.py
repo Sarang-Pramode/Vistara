@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import plotly.express as px
 from streamlit_plotly_events import plotly_events # pip install streamlit-plotly-events
+import random
 
 #plotly events inside streamlit - https://github.com/null-jones/streamlit-plotly-events
 
@@ -106,6 +107,11 @@ def stackTiles(lat,lon, boxSize=100, prefix ='NY_NewYorkCity/'):  # 'NY_FingerLa
     lidar_df = lidar_df[lidar_df['Y'] >= y - boxSize/2 ]
     return lidar_df
 
+def readGeoJSON(filepath):
+    with open(filepath) as f:
+        features = json.load(f)["features"]                
+    return features
+
 ###############################################################################
 
 
@@ -113,25 +119,61 @@ st.set_page_config(
         page_title="Data Extraction",
 )
 
-st.markdown("<h1 style='text-align: center; color: white;'>Project Vistara</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: white;'>Select A Location</h1>", unsafe_allow_html=True)
 
+#Add the dropdown for the user to select between NYC map and US map
+st.sidebar.title("Select the map to proceed")
+map_selection = st.sidebar.selectbox("Select a map", ("NYC", "US"))
+
+if map_selection == "Select Map":
+    st.sidebar.markdown("Please select a map to proceed")
+
+#default map is NYC
 filepath = '2010 Census Tracts/geo_export_139fc905-b132-4c03-84d5-ae9e70dded42.shp'
+if map_selection == "US":
+    filepath = 'lidarBoundaries.geojson'
 
-gdf = gpd.read_file(filepath)
+    #read in the geojson file
+    features = readGeoJSON(filepath)
 
-# Create Plotly figure
-fig = px.choropleth_mapbox(
-    gdf,
-    geojson=gdf.geometry,
-    locations=gdf.index,
-    mapbox_style='carto-positron',
-    center={'lat': 40.64, 'lon':-73.7},#center={'lat': 40.74949210762701, 'lon':-73.97236357852755},
-    zoom=10)
+    #Read the file into a geopandas dataframe
+    gdf = gpd.GeoDataFrame.from_features(features)
 
-fig.update_layout(height=600, width=1000, showlegend=False,
-                margin=dict(l=0,r=0,b=0,t=0),
-                paper_bgcolor="Black"
-)
+    # Create Plotly figure
+    fig = px.choropleth_mapbox(
+        gdf,
+        geojson=gdf.geometry,
+        locations=gdf.index,
+        mapbox_style='carto-positron',
+        center={'lat': 27.8283, 'lon':-78.5795},
+        zoom=3)
+
+    fig.update_layout(height=800, width=1000, showlegend=False,
+                    margin=dict(l=0,r=0,b=0,t=0),
+                    paper_bgcolor="Black"
+    )
+
+
+elif map_selection == "NYC":
+    filepath = '2010 Census Tracts/geo_export_139fc905-b132-4c03-84d5-ae9e70dded42.shp'
+    gdf = gpd.read_file(filepath)
+
+    
+    # Create Plotly figure
+    fig = px.choropleth_mapbox(
+        gdf,
+        geojson=gdf.geometry,
+        locations=gdf.index,
+        mapbox_style='carto-positron',
+        center={'lat': 40.64, 'lon':-73.7},#center={'lat': 40.74949210762701, 'lon':-73.97236357852755},
+        zoom=10)
+
+    fig.update_layout(height=600, width=1000, showlegend=False,
+                    margin=dict(l=0,r=0,b=0,t=0),
+                    paper_bgcolor="cadetblue"
+    )
+
+
 
 selected_points = plotly_events(fig)
 
@@ -145,9 +187,19 @@ selected_points = plotly_events(fig)
 #   }
 # ]
 
-if selected_points:
+# Add a input to take in how big the box should be and limit it to 1000
+boxSize_input = st.sidebar.number_input("Enter the size of the box in meters", min_value=1, max_value=500, value=100)
 
-    st.write(selected_points)
+# Show a pop up if the user enters a value greater than 300 but let them continue
+
+if boxSize_input > 500:
+    st.sidebar.warning("The box size is too large. It may take a while to process the data. Please be patient.")
+
+LidarArea = None
+
+if selected_points and boxSize_input:
+
+    # st.write(selected_points)
 
     single_row = gdf.iloc[selected_points[0]['pointIndex']]
 
@@ -161,9 +213,21 @@ if selected_points:
     print("Latitude:", lat)
     print("Longitude:", lon)
 
-    boxSize = 150
+    if map_selection == "US":
+        name = single_row['name']
+        st.write(name)
+        st.write(f"Count of Lidar Points in Selected Area :  {single_row['count']}")
+        lidarArea = '{}/'.format(name)
 
-    lidar_df = stackTiles(lat,lon,boxSize)
+    elif map_selection == "NYC":
+        lidarArea = 'NY_NewYorkCity/'
+    
+    st.write(f"Selected Area : {lidarArea}")
+
+    boxSize = boxSize_input
+
+    # Get the point cloud data
+    lidar_df = stackTiles(lat,lon,boxSize,prefix=lidarArea)
 
     st.write(f"Totol Number of Points {len(lidar_df)}")
 
@@ -176,6 +240,14 @@ if selected_points:
 
     st.plotly_chart(fig)
     st.write("Point cloud data:", lidar_df)
+
+    # Add a dpwnload button to download the lidar_df
+    st.download_button(
+        label="Download data as CSV",
+        data=lidar_df.to_csv(index=False),
+        file_name='downloaded_Raw_lidarData.csv',
+        mime='text/csv',
+    )
 
     # Save the point cloud data to the session state
     st.session_state['Extracted_Lidar_Data'] = lidar_df

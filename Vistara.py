@@ -7,6 +7,8 @@ import plotly.express as px
 
 st.set_page_config(
         page_title="Visualizing LiDAR Point Clouds",
+        initial_sidebar_state='collapsed',
+        layout='wide'
 )
 
 
@@ -20,7 +22,7 @@ st.markdown("<h3 style='text-align: \
 st.session_state["filename"] = "Vistara"
 
 # Function to process the LAS file and convert it to a DataFrame
-def process_las_file(filepath):
+def process_las_file(filepath, sampling_rate=10):
     las_file = laspy.read(filepath)
 
     #Making a datframe from the lidar data
@@ -46,7 +48,7 @@ def process_las_file(filepath):
     lidar_df["classification"] = lidar_df["classification"].astype(int)
 
     #sample lidar_df
-    lidar_df = lidar_df[::10]
+    lidar_df = lidar_df[::sampling_rate]
 
 
     return lidar_df
@@ -73,9 +75,34 @@ color_map = {
 fig = px.scatter_3d(point_cloud_df, x='X', y='Y', z='Z', color='classification',
                     color_discrete_map=color_map,
                     hover_data=['X', 'Y', 'Z', 'classification'],
-                    width=800, height=800)
+                    width=400, height=500)
 
 fig.update_traces(marker=dict(size=1.2))
-fig.update_layout(scene=dict(aspectmode='data'))
+fig.update_layout(scene=dict(aspectmode='data'), showlegend=False)
+fig.update_xaxes(showticklabels=False)
+fig.update_yaxes(showticklabels=False)
 
-st.plotly_chart(fig)
+
+st.plotly_chart(fig, use_container_width=True)
+
+st.markdown("<h4 style='text-align: \
+            center; color: white;'> \
+            Vistara was built to showcase the capabilites of TerraVide \
+            - an open source python package to process LiDAR data <br> \
+            The Tile you see above was classified into Trees , Buildings and ground from raw X,Y,Z coordinates</h4>"
+            , unsafe_allow_html=True)
+
+# Add a horizontal line that separates the footer from the main content and spans the entire width of the app
+st.markdown("<hr style='border: 1px solid grey;'>", unsafe_allow_html=True)
+
+#Add a link to the TerraVide GitHub repo
+st.markdown("<h6 style='text-align: \
+            left; color: grey;'> \
+            Built with <a href='https://pypi.org/project/TerraVide/' target='_blank'>TerraVide</a></h4>"
+            , unsafe_allow_html=True)
+
+# Add a small footer to the end of the streamlit app with the author's name
+st.markdown("<h6 style='text-align: \
+            left; color: grey;'> \
+            Built by <a href='https://www.linkedin.com/in/sarang-pramode-713b99167/'>Sarang Pramode</a></h4>"
+            , unsafe_allow_html=True)
