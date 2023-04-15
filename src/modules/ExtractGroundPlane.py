@@ -20,6 +20,8 @@ class GP_class():
         Lpoints = lidarSubtilePoints
 
         #Ground Seperation Algorithm
+        Ground_Points = np.empty((0,3))
+        Not_ground_points = np.empty((0,3))
 
         #Get Z values of all points
         z_values = Lpoints[:,2]
