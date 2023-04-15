@@ -103,7 +103,7 @@ else :
 
     TileDivision_g = int(BoxSize_input_usr/10)
 
-    st.write("TileDivision = ",TileDivision_g)
+    #st.write("TileDivision = ",TileDivision_g)
 
     #Initate logger
     InitiateLogger()
@@ -214,7 +214,7 @@ else:
 
     TileDivision_t = int(BoxSize_input_usr/100)
 
-    st.write("TileDivision tree = ",TileDivision_t)
+   # st.write("TileDivision tree = ",TileDivision_t)
 
     #lasTile class
     TileObj_SR = MRC.MR_class(SR_df,TileDivision_t) #Single Return Points
