@@ -98,14 +98,31 @@ st.markdown("<p style='text-align: \
 # Add a horizontal line that separates the footer from the main content and spans the entire width of the app
 st.markdown("<hr style='border: 1px solid grey;'>", unsafe_allow_html=True)
 
-#Add a link to the TerraVide GitHub repo
+# #Add a link to the TerraVide repo
+# st.markdown("<h6 style='text-align: \
+#             left; color: grey;'> \
+#             Built with <a href='https://pypi.org/project/TerraVide/' target='_blank'>TerraVide</a></h4>"
+#             , unsafe_allow_html=True)
+
+# Write the text - you can check out my repo here
 st.markdown("<h6 style='text-align: \
             left; color: grey;'> \
-            Built with <a href='https://pypi.org/project/TerraVide/' target='_blank'>TerraVide</a></h4>"
+            You can check out TerraVide (Its Open Source!) <a href='https://pypi.org/project/TerraVide/' target='_blank' style='color: #5f87c7;'>here</a></h6>"
             , unsafe_allow_html=True)
+
 
 # Add a small footer to the end of the streamlit app with the author's name
 st.markdown("<h6 style='text-align: \
             left; color: grey;'> \
-            Built by <a href='https://www.linkedin.com/in/sarang-pramode-713b99167/'>Sarang Pramode</a></h4>"
+            Let me know what you think of this app! Connect with me on <a href='https://www.linkedin.com/in/sarang-pramode-713b99167/' style='color: #5f87c7;' >LinkedIn! </a></h6> \
+            <h6 style='text-align: \
+            left; color: grey;'> \
+            Made by <a href='https://www.sarangpramode.com/' style='color: #5f87c7;' >Sarang Pramode</a></h6>"
             , unsafe_allow_html=True)
+
+# Add a version number to the footer
+st.markdown("<h6 style='text-align: \
+            left; color: #2d3645;'> \
+            Version 1.0.0</h6>"
+            , unsafe_allow_html=True)
+
