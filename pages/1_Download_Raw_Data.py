@@ -19,6 +19,8 @@ import laspy
 import numpy as np
 import pandas as pd
 
+import plotly.graph_objects as go
+
 def convertLatLon(lat,lon,epsgNumber):
     transformer = Transformer.from_crs( "epsg:4326", "epsg:{}".format(epsgNumber) ) 
     x, y = transformer.transform(lat, lon)
@@ -127,6 +129,15 @@ st.markdown("<h1 style='text-align: center; color: white;'>Select A Location</h1
 st.sidebar.title("Select the map to proceed")
 map_selection = st.sidebar.selectbox("Select a map", ("NYC", "US"))
 
+#Add a checkbox to the sidebar and ask if the user wants to enter a manual location
+manual_location = st.sidebar.checkbox("Enter a manual location")
+
+#If the user selects the manual location checkbox, then ask for the latitude and longitude
+if manual_location:
+    lat = float(st.sidebar.text_input("Enter the latitude", value="40.770236377930985"))
+    lon = float(st.sidebar.text_input("Enter the longitude", value="-73.97408389247846"))
+
+#If the user does not select the manual location checkbox, then ask for the address 
 if map_selection == "Select Map":
     st.sidebar.markdown("Please select a map to proceed")
 
@@ -204,32 +215,54 @@ if boxSize_input > 300:
 
 LidarArea = None
 
-if selected_points and boxSize_input:
+if (selected_points and boxSize_input) or (manual_location and boxSize_input and lat and lon):
 
     # st.write(selected_points)
 
-    single_row = gdf.iloc[selected_points[0]['pointIndex']]
+    if selected_points:
 
-    # Get the latitude and longitude of the single row's geometry
-    point = single_row.geometry.centroid
-    lat, lon = point.y, point.x
+        single_row = gdf.iloc[selected_points[0]['pointIndex']]
 
-    st.write(f"Location : {lat,lon}")
+        # Get the latitude and longitude of the single row's geometry
+        point = single_row.geometry.centroid
+        lat, lon = point.y, point.x
 
-    # Print the latitude and longitude
-    print("Latitude:", lat)
-    print("Longitude:", lon)
+        st.write(f"Location : {lat,lon}")
 
-    if map_selection == "US":
-        name = single_row['name']
-        #st.write(name)
-        st.write(f"Count of Lidar Points in Mapped Area :  {single_row['count']}")
-        lidarArea = '{}/'.format(name)
+        # Print the latitude and longitude
+        print("Latitude:", lat)
+        print("Longitude:", lon)
 
-    elif map_selection == "NYC":
-        lidarArea = 'NY_NewYorkCity/'
+        if map_selection == "US":
+            name = single_row['name']
+            #st.write(name)
+            st.write(f"Count of Lidar Points in Mapped Area :  {single_row['count']}")
+            lidarArea = '{}/'.format(name)
+
+        elif map_selection == "NYC":
+            lidarArea = 'NY_NewYorkCity/'
+        
+        st.write(f"Selected Area : {lidarArea}")
     
-    st.write(f"Selected Area : {lidarArea}")
+    elif manual_location and map_selection == "NYC":
+        st.write(f"Location : {lat,lon}")
+        lidarArea = 'NY_NewYorkCity/'
+        st.write(f"Selected Area : {lidarArea}")
+
+        # Add a trace to the map to show the selected point
+        fig.add_trace(go.Scattermapbox(
+            lat=[lat],
+            lon=[lon],
+            mode='markers',
+            marker=go.scattermapbox.Marker(
+                size=14
+            ),
+            text=[f"Selected Point"],
+        ))
+    
+    else:
+        st.sidebar.warning("Please select a point on the map or enter a manual location(Only for NYC map)")
+    
 
     boxSize = boxSize_input
 
@@ -255,6 +288,15 @@ if selected_points and boxSize_input:
         file_name='Raw_lidarData.csv',
         mime='text/csv',
     )
+
+    # Add a button to open the manual location on google earth
+    if manual_location and map_selection == "NYC":
+
+        #Create the link to open the location on google earth
+        link = f"Open Entered Location on Google Earth - https://earth.google.com/web/search/{lat},{lon}"
+
+        st.sidebar.write(link)
+
 
     # Save the point cloud data to the session state
     st.session_state['Extracted_Lidar_Data'] = lidar_df
