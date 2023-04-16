@@ -58,7 +58,7 @@ def process_las_file(filepath, sampling_rate=10):
 filepath = "lasFile_Reconstructed_25192_sampled.las"
 
 # Process the uploaded file
-point_cloud_df = process_las_file(filepath)
+point_cloud_df = process_las_file(filepath, sampling_rate=2)
 
 #Convert classification types to string
 point_cloud_df["classification"] = point_cloud_df["classification"].astype(str)
@@ -124,6 +124,6 @@ st.markdown("<h6 style='text-align: \
 # Add a version number to the footer
 st.markdown("<h6 style='text-align: \
             left; color: #2d3645;'> \
-            Version 1.2.0</h6>"
+            Version 1.2.1</h6>"
             , unsafe_allow_html=True)
 
