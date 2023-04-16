@@ -58,7 +58,7 @@ def process_las_file(filepath, sampling_rate=10):
 filepath = "lasFile_Reconstructed_25192_sampled.las"
 
 # Process the uploaded file
-point_cloud_df = process_las_file(filepath, sampling_rate=2)
+point_cloud_df = process_las_file(filepath, sampling_rate=5)
 
 #Convert classification types to string
 point_cloud_df["classification"] = point_cloud_df["classification"].astype(str)
@@ -77,7 +77,7 @@ color_map = {
 fig = px.scatter_3d(point_cloud_df, x='X', y='Y', z='Z', color='classification',
                     color_discrete_map=color_map,
                     hover_data=['X', 'Y', 'Z', 'classification'],
-                    width=400, height=500)
+                    width=400, height=800)
 
 fig.update_traces(marker=dict(size=1.2))
 fig.update_layout(scene=dict(aspectmode='data'), showlegend=False)

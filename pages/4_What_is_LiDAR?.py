@@ -30,7 +30,7 @@ LiDAR sensors can emit laser pulses in different patterns and frequencies, depen
 
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
-    st.image("LiDAR scan example.png", width=500, caption="LiDAR scan example")
+    st.image("LiDAR scan example.png", width=300, caption="LiDAR scan example")
 
 st.markdown("<h3>What are the applications of LiDAR?</h3>", unsafe_allow_html=True)
 
