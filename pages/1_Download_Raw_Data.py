@@ -211,7 +211,7 @@ boxSize_input = st.sidebar.number_input("Enter the size of the box in meters", m
 st.session_state["boxSize"] = boxSize_input
 
 # Add a warning if the box size is too large
-if boxSize_input > 300:
+if boxSize_input > 299:
     st.sidebar.warning("The box size is too large. It may take a while to download the data. Please be patient.")
 
 LidarArea = None
@@ -244,6 +244,10 @@ if (selected_points and boxSize_input) or (manual_location and boxSize_input and
             lidarArea = 'NY_NewYorkCity/'
         
         st.write(f"Selected Area : {lidarArea}")
+
+        
+
+            
     
     elif manual_location:
         st.write(f"Location : {lat,lon}")
