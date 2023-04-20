@@ -163,7 +163,8 @@ if map_selection == "US":
         mapbox_style='carto-positron',
         center={'lat': 27.8283, 'lon':-78.5795},
         hover_data=['name'],
-        zoom=3)
+        zoom=3,
+        opacity=0.25)
 
     fig.update_layout(height=800, width=1000, showlegend=False,
                     margin=dict(l=0,r=0,b=0,t=0),
@@ -183,7 +184,8 @@ elif map_selection == "NYC":
         locations=gdf.index,
         mapbox_style='carto-positron',
         center={'lat': 40.64, 'lon':-73.7},#center={'lat': 40.74949210762701, 'lon':-73.97236357852755},
-        zoom=10)
+        zoom=10,
+        opacity=0.25)
 
     fig.update_layout(height=600, width=1000, showlegend=False,
                     margin=dict(l=0,r=0,b=0,t=0),
