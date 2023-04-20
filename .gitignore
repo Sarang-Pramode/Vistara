@@ -6,3 +6,5 @@ LogFile
 laz_*
 3_Central_Park_Demo.py
 5_Download_NYC_Dataset.py
+5_LiDAR_2017_LiDAR_Downloader.py
+Classified_Data_dir
