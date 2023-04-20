@@ -5,12 +5,40 @@ import numpy as np
 import laspy
 import plotly.express as px
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+from streamlit.source_util import get_pages
+
 
 st.set_page_config(
         page_title="Visualizing LiDAR Point Clouds",
         layout='wide'
 )
 
+from streamlit.components.v1 import html
+
+def nav_page(page_name, timeout_secs=3):
+    nav_script = """
+        <script type="text/javascript">
+            function attempt_nav_page(page_name, start_time, timeout_secs) {
+                var links = window.parent.document.getElementsByTagName("a");
+                for (var i = 0; i < links.length; i++) {
+                    if (links[i].href.toLowerCase().endsWith("/" + page_name.toLowerCase())) {
+                        links[i].click();
+                        return;
+                    }
+                }
+                var elasped = new Date() - start_time;
+                if (elasped < timeout_secs * 1000) {
+                    setTimeout(attempt_nav_page, 100, page_name, start_time, timeout_secs);
+                } else {
+                    alert("Unable to navigate to page '" + page_name + "' after " + timeout_secs + " second(s).");
+                }
+            }
+            window.addEventListener("load", function() {
+                attempt_nav_page("%s", new Date(), %d);
+            });
+        </script>
+    """ % (page_name, timeout_secs)
+    html(nav_script)
 
 st.markdown("<h1 style='text-align: center; color: white;'>Vistara</h1>", unsafe_allow_html=True)
 
@@ -71,6 +99,7 @@ border_image1 = ImageOps.expand(image1, border=border_width, fill='black')
 border_image2 = ImageOps.expand(image2, border=border_width, fill='black')
 border_image3 = ImageOps.expand(image3, border=border_width, fill='black')
 border_image4 = ImageOps.expand(image4, border=border_width, fill='black')
+
 
 Fontsize = 20
 # Define the layout of the cells using a 2x2 grid
@@ -169,49 +198,55 @@ def process_las_file(filepath, sampling_rate=10):
     return lidar_df
 
 #Add a space of 10 pixels between the columns
-st.markdown("<style>.main * div:nth-child(2) > div{padding-left: 30px;}</style>", unsafe_allow_html=True)
+st.markdown("<style>.main * div:nth-child(2) > div{padding-top: 30px;}</style>", unsafe_allow_html=True)
 
 # Add a horizontal line that separates the footer from the main content and spans the entire width of the app
 st.markdown("<hr style='border: 1px solid grey;'>", unsafe_allow_html=True)
-
-# Add a button to go to the next page
-
-            
 
 col1, col2 = st.columns(2)
 
 with col1:
 
+
+    # Add a title to the app
+    st.markdown("<h1 style='text-align: center; color: white;'>About</h1>", unsafe_allow_html=True)
     
     st.markdown("<p style='text-align: \
-                center; color: white;'> \
-                Vistara was built to showcase the capabilites of TerraVide \
-                - an open source python package to process LiDAR data <br> \
-                The Tile you see above was classified into Trees , Buildings and ground from raw X,Y,Z coordinates</p>"
+                left; color: white;'> \
+                A large number of cities have been conducting LiDAR surveys to better map their cities. \
+                Most of these surveys are public but requires significant technical expertise to extract and analyze. \
+                To aid in the analysis of the neighbourhoods through LiDAR, I built this app to showcase the capabilities of an open source python package \
+                I call <span style='color: #08a308; font-weight:bold;'>TerraVide</span>. You can check it out <a href='https://pypi.org/project/TerraVide/' target='_blank' style='color: #5f87c7;'>here</a><p> \
+                <br> \
+                Vistara was built to showcase some capabilites of <span style='color: #08a308; font-weight:bold;'>TerraVide</span>. \
+                The tile you see on the right represents the classification of over <span style= font-weight:bold;'>12 Million</span> raw X,Y,Z coordinates into  \
+                <span style= font-weight:bold;'>Trees</span>,\
+                <span style= font-weight:bold;'>Buildings</span>, \
+                and <span style= font-weight:bold;'>Ground</span></p>"
                 , unsafe_allow_html=True)
 
-    # Write the text - you can check out my repo here
-    st.markdown("<h6 style='text-align: \
-                left; color: grey;'> \
-                You can check out TerraVide (Its Open Source!) <a href='https://pypi.org/project/TerraVide/' target='_blank' style='color: #5f87c7;'>here</a></h6>"
-                , unsafe_allow_html=True)
+    # # Write the text - you can check out my repo here
+    # st.markdown("<h6 style='text-align: \
+    #             left; color: grey;'> \
+    #             You can check out TerraVide (Its Open Source!) <a href='https://pypi.org/project/TerraVide/' target='_blank' style='color: #5f87c7;'>here</a></h6>"
+    #             , unsafe_allow_html=True)
 
 
-    # Add a small footer to the end of the streamlit app with the author's name
-    st.markdown("<h6 style='text-align: \
-                left; color: grey;'> \
-                Let me know what you think of this app! Connect with me on <a href='https://www.linkedin.com/in/sarang-pramode-713b99167/' style='color: #5f87c7;' >LinkedIn! </a></h6> \
-                <h6 style='text-align: \
-                left; color: grey;'> \
-                Made by <a href='https://www.sarangpramode.com/' style='color: #5f87c7;' >Sarang Pramode</a></h6>"
-                , unsafe_allow_html=True)
+    # # Add a small footer to the end of the streamlit app with the author's name
+    # st.markdown("<h6 style='text-align: \
+    #             left; color: grey;'> \
+    #             Let me know what you think of this app! Connect with me on <a href='https://www.linkedin.com/in/sarang-pramode-713b99167/' style='color: #5f87c7;' >LinkedIn! </a></h6> \
+    #             <h6 style='text-align: \
+    #             left; color: grey;'> \
+    #             Made by <a href='https://www.sarangpramode.com/' style='color: #5f87c7;' >Sarang Pramode</a></h6>"
+    #             , unsafe_allow_html=True)
 
 with col2:
 
     filepath = "lasFile_Reconstructed_25192_sampled.las"
 
     # Process the uploaded file
-    point_cloud_df = process_las_file(filepath, sampling_rate=20)
+    point_cloud_df = process_las_file(filepath, sampling_rate=15)
 
     #Convert classification types to string
     point_cloud_df["classification"] = point_cloud_df["classification"].astype(str)
@@ -221,7 +256,7 @@ with col2:
     color_map = {
         '1': 'white',
         '2': 'red',
-        '4': 'green',
+        '4': 'blue',
         '5': 'green',
         '6': 'green'
     }
@@ -230,8 +265,8 @@ with col2:
     fig = px.scatter_3d(point_cloud_df, x='X', y='Y', z='Z', color='classification',
                         color_discrete_map=color_map,
                         hover_data=['X', 'Y', 'Z', 'classification'],
-                        width=400, height=800,
-                        opacity=0.5)
+                        width=300, height=400,
+                        opacity=0.8)
 
     fig.update_traces(marker=dict(size=1.2))
     fig.update_layout(scene=dict(aspectmode='data'), showlegend=False)
@@ -241,16 +276,22 @@ with col2:
     fig.update_yaxes(showticklabels=False)
 
     # Set Zoom for the plot
-    fig.update_layout(scene_camera_eye=dict(x=2, y=2, z=2))
+    fig.update_layout(scene_camera_eye=dict(x=1, y=1, z=1))
 
     st.plotly_chart(fig, use_container_width=True)
 
-    st.markdown("<h1 style='text-align: center; color: white;'>3D Classified Tile Visualization</h1>", unsafe_allow_html=True)
-
+# Ask the user to use the sidebar to go to the next page
+st.markdown("<h6 style='text-align: \
+            left; color: grey;'> \
+            Use the sidebar to go to the next page</h6>"
+            , unsafe_allow_html=True)
 
 
 # Add a horizontal line that separates the footer from the main content and spans the entire width of the app
 st.markdown("<hr style='border: 1px solid grey;'>", unsafe_allow_html=True)
+
+#Center align the text to the middle of the column
+st.markdown("<p style='text-align: center; color: white;'>Built with ❤️ by <a href='https://www.sarangpramode.com/' target='_blank' style='color: #5f87c7;'>Sarang Pramode</a></p>", unsafe_allow_html=True)  
 
 # Add a version number to the footer
 st.markdown("<h6 style='text-align: \
