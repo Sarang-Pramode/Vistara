@@ -293,10 +293,17 @@ st.markdown("<hr style='border: 1px solid grey;'>", unsafe_allow_html=True)
 #Center align the text to the middle of the column
 st.markdown("<p style='text-align: center; color: white;'>Built with ❤️ by <a href='https://www.sarangpramode.com/' target='_blank' style='color: #5f87c7;'>Sarang Pramode</a></p>", unsafe_allow_html=True)  
 
+st.markdown("<p style='text-align: center; color: white;'> \
+            Result of Collaberation between the \
+            <a href='https://urban.tech.cornell.edu/' target='_blank' style='color: #5f87c7;'>Urban Tech Hub @ Cornell Tech</a> \
+            and the\
+            <a href='https://labs.aap.cornell.edu/daslab' target='_blank' style='color: #5f87c7;'>Design Across Scales Lab @ Cornell AAP</a></p>", unsafe_allow_html=True)  
+
+
 # Add a version number to the footer
 st.markdown("<h6 style='text-align: \
             left; color: #2d3645;'> \
-            Version 1.2.1</h6>"
+            Version 1.5.0</h6>"
             , unsafe_allow_html=True)
 
 # #Dont show any axis values in the plot
