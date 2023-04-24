@@ -80,12 +80,16 @@ if Tile_SelectionMade:
 
     #st.write(object_url)
 
+
     #Downlaod the Raw Tile
     r = requests.head(RawTile_object_url)
     if r.status_code == 200:
         #st.write('File Exists')
-        st.markdown(f'## <a href="{RawTile_object_url}" target="_blank">Click Here To Download Raw Lidar Tile</a>', unsafe_allow_html=True)
-        st.markdown(f'## <a href="{ClassifiedTile_object_url}" target="_blank">Click Here To Download Tile Dataset</a>', unsafe_allow_html=True)
+        st.markdown(f'## <a style="color: white;" href="{RawTile_object_url}" target="_blank">Click Here To Download Raw Lidar Tile</a>', unsafe_allow_html=True)
+        st.markdown(f'## <a style="color: blue;" href="{ClassifiedTile_object_url}" target="_blank">Click Here To Download Tile Dataset</a>', unsafe_allow_html=True)
+
+        # st.markdown(f'## <a href="{RawTile_object_url}" target="_blank">Click Here To Download Raw Lidar Tile</a>', unsafe_allow_html=True)
+        # st.markdown(f'## <a href="{ClassifiedTile_object_url}" target="_blank">Click Here To Download Tile Dataset</a>', unsafe_allow_html=True)
     else:
         st.write('File does not exist! Please select another tile.')
 
