@@ -164,8 +164,8 @@ class lasTile:
 
         subtile_df = self.lidar_Dataframe[ #Store each subset of the tile
             (
-                self.lidar_Dataframe['X'].between(xsub_min, xsub_max, inclusive=False) & 
-                self.lidar_Dataframe['Y'].between(ysub_min, ysub_max, inclusive=False)
+                self.lidar_Dataframe['X'].between(xsub_min, xsub_max, inclusive='neither') & 
+                self.lidar_Dataframe['Y'].between(ysub_min, ysub_max, inclusive='neither')
             )
         ]
 
