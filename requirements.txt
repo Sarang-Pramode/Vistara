@@ -2,6 +2,7 @@ streamlit==1.18.1
 streamlit-folium==0.11.1
 streamlit-plotly-events==0.0.6
 pandas==1.5.3
+pillow==9.4.0
 numpy
 laspy==2.4.1
 laszip==0.2.1
